@@ -1,0 +1,25 @@
+{% load staticfiles %}
+{% load menu %}
+
+<div id="footer">
+    <div class="copyright">
+        <ul class="menu">
+            <li>Query-able Data Repository {% include "theme/footer/version.html" %} (2012 - {% now "Y" %})</li>
+            <li>
+                Designed by <a href="https://nist.gov"><img src="{% static 'img/logo_nist_black.png' %}"
+                                                            class="small-logo"
+                                                            alt="National Institute of Standards and Technology"/></a>
+            </li>
+            {% block footer_menu %}
+                {% generate_menu %}
+
+                {% for item in menus.footer %}
+                    <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+                {% endfor %}
+            {% endblock %}
+            <li>QDR is on <a href="https://github.com/usnistgov/qdr"><i
+                    class="fa fa-github"></i> Github</a></li>
+            <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </div>
+</div>
