@@ -48,6 +48,7 @@ INSTALLED_APPS = (
     # Core apps
     "core_main_app",
     "core_website_app",
+    "core_custom_queries_app",
 )
 
 MIDDLEWARE = (

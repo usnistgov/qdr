@@ -1,2 +1,3 @@
 core-main-app==1.0.0-beta4
 core-website-app==1.0.0-beta4
+core_custom_queries_app==1.0.0-alpha1

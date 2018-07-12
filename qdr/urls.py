@@ -19,5 +19,6 @@ urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^', include("core_main_app.urls")),
     url(r'^', include("core_website_app.urls")),
+    url(r'^custom_queries/', include('core_custom_queries_app.urls')),
 ]
 
