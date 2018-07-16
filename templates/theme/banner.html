@@ -1,3 +1,10 @@
+{% load staticfiles %}
+
 <header>
-    <h1>Query-able Data Repository</h1>
+    <li class="nist-banner-logo">
+        <a href="{% url 'core_main_app_homepage' %}" class="text">
+            <img src="{% static 'img/mgi-logo.png' %}" alt="MGI logo"/>
+        </a>
+        <h1 class="nist-banner-title">Query-able Data Repository</h1>
+    </li>
 </header>

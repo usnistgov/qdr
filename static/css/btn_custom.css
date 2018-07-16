@@ -1,5 +1,5 @@
 :root {
-    --main-highlight-color: #257ABC;
+    --main-highlight-color: #255687;
 }
 
 .btn-custom {
@@ -13,7 +13,7 @@
 }
 
 .btn-custom:hover {
-    color: #fff;
+    color: white !importantss;
     transition: color 0.2s ease-in-out
 }
 

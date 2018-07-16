@@ -11,7 +11,7 @@
 /* Reset */
 
     :root {
-        --main-highlight-color: #257ABC;
+        --main-highlight-color: #255687;
     }
 
 	/*html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {*/
@@ -2341,7 +2341,7 @@
 	#header {
 		text-align: center;
 		/*padding: 1em 0 0 0;*/
-		background-color: black;
+		background-color: #255687;
 		background-position: top left;
 		background-blend-mode: difference;
 		background-size: 3em 6em;
@@ -2352,6 +2352,7 @@
 				text-align: center;
 				padding-left: 2em;
 				padding-right: 2em;
+				padding-top: 2em;
 			}
 
 				#header header h1 {
@@ -2370,11 +2371,11 @@
 
 	#nav {
 		cursor: default;
-		background-color: #a5d1ed;
-		background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3)), url("../img/bg01.png");
+		background-color: #4F91D3;
+		/* background-image: -moz-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3)), url("../img/bg01.png");
 		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3)), url("../img/bg01.png");
 		background-image: -ms-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3)), url("../img/bg01.png");
-		background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3)), url("../img/bg01.png");
+		background-image: linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,0.3)), url("../img/bg01.png"); */
 		padding: 0;
 		text-align: right;
 	}
@@ -2401,7 +2402,7 @@
 
                 /* Added by NIST */
 			    #nav > ul > li > a:not(.btn-custom) {
-					color: black;
+					color: white;
 				}
 
 				#nav > ul > li a {
@@ -2410,6 +2411,7 @@
 					display: block;
 					padding: 1em 0.5em;
 					margin: 0.25em 0;
+					color: white !important;
 				}
 
 				#nav > ul > li:first-child {
@@ -2417,7 +2419,7 @@
 				}
 
 				#nav > ul > li:hover a {
-					color: black;
+					color: white;
 					font-weight: 600;
 				}
 
@@ -2439,7 +2441,7 @@
 						left: 50%;
 						margin-left: -0.375em;
 						/*background-color: #37c0fb;*/
-			            background-color: var(--main-highlight-color);
+			            background-color: #255687;
 						background-image: url("../img/bg01.png");
 					}
 
@@ -2462,13 +2464,13 @@
 /* Dropotron */
 
 	.dropotron {
-		background-color: #a5d1ed;/*#333;*/
+		background-color: #255687;
 		background-image: -moz-linear-gradient(top, rgba(0,0,0,0.3), rgba(0,0,0,0)), url("../img/bg01.png");
 		background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.3), rgba(0,0,0,0)), url("../img/bg01.png");
 		background-image: -ms-linear-gradient(top, rgba(0,0,0,0.3), rgba(0,0,0,0)), url("../img/bg01.png");
 		background-image: linear-gradient(top, rgba(0,0,0,0.3), rgba(0,0,0,0)), url("../img/bg01.png");
 		border-radius: 5px;
-		color: #fff;
+		color: white;
 		min-width: 10em;
 		padding: 1em 0;
 		/*text-align: center;*/
@@ -2481,7 +2483,7 @@
 		}
 
 			.dropotron > li > a {
-				color: black;
+				color: white !important;
 				text-decoration: none;
 				border: 0;
 			    margin: 0 0.6em 0 0.5em; /* modified by NIST */
@@ -2489,14 +2491,14 @@
 			}
 
 			.dropotron > li.active > a {
-				color: black;
+				color: white !important;
 				/* Added by NIST */
 				background-color: var(--main-highlight-color);
                 border-radius: 5px;
 			}
 
 			.dropotron > li:hover > a {
-                color: black;
+                color: white !important;
                 font-weight: 600;
             }
 

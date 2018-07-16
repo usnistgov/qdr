@@ -249,7 +249,7 @@ CUSTOM_CURATE = 'Add your resource'
 CUSTOM_DATA = "Materials Data"
 CUSTOM_NAME = "QDR"
 
-DISPLAY_NIST_HEADERS = True
+DISPLAY_NIST_HEADERS = False
 
 # FIXME: set desired value before release
 # Lists in data not stored if number of elements is over the limit (e.g. 100)
