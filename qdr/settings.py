@@ -288,3 +288,6 @@ REST_FRAMEWORK = {
 
 HOMEPAGE_NB_LAST_TEMPLATES = 6
 
+SSL_CERTIFICATES_DIR = 'certs'
+""" :py:class:`str`: SSL certificates directory location.
+"""
