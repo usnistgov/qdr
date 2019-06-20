@@ -11,6 +11,9 @@ import os
 
 from mongoengine.connection import connect
 
+from core_main_app.utils.logger.logger_utils import set_generic_handler, set_generic_logger,\
+    update_logger_with_local_app
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -127,51 +130,91 @@ STATICFILES_DIRS = (
 )
 
 # Logging
+LOGGING_SERVER = True
+LOGGING_CLIENT = True
+LOGGING_DB = True
+
+LOGGER_FILE_SERVER = os.path.join(BASE_DIR, "logfile_server.txt")
+LOGGER_FILE_CLIENT = os.path.join(BASE_DIR, "logfile_client.txt")
+LOGGER_FILE_DB = os.path.join(BASE_DIR, "logfile_db.txt")
+LOGGER_FILE_SECURITY = os.path.join(BASE_DIR, "logfile_security.txt")
+LOGGER_FILE_APP = os.path.join(BASE_DIR, "logfile_app.txt")
+
+LOGGER_LEVEL = os.getenv('DJANGO_LOG_LEVEL', 'DEBUG')
+LOGGER_CLIENT_LEVEL = os.getenv('DJANGO_LOG_LEVEL', 'DEBUG')
+LOGGER_SERVER_LEVEL = os.getenv('DJANGO_LOG_LEVEL', 'DEBUG')
+LOGGER_DB_LEVEL = os.getenv('DJANGO_LOG_LEVEL', 'DEBUG')
+LOGGER_APP_LEVEL = os.getenv('DJANGO_LOG_LEVEL', 'DEBUG')
+
+LOGGER_MAX_BYTES = 500000
+LOGGER_BACKUP_COUNT = 2
+
+local_logger_conf = {
+    'handlers': ['app_handler', 'console'],
+    'level': LOGGER_APP_LEVEL,
+}
+
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
     'formatters': {
-        'standard': {
-            'format': "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
-            'datefmt': "%d/%b/%Y %H:%M:%S"
+        'fmt-default': {
+            'format': "%(asctime)s\t%(name)s\t%(pathname)s\tl.%(lineno)s\t%(message)s",
+            'datefmt': "%Y-%m-%d %H:%M:%S"
         },
     },
     'handlers': {
-        'null': {
-            'level': 'DEBUG',
-            'class': 'logging.NullHandler',
-        },
-        'logfile': {
+        'logfile-security': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': os.path.join(BASE_DIR, "logfile"),
-            'maxBytes': 50000,
-            'backupCount': 2,
-            'formatter': 'standard',
+            'filename': LOGGER_FILE_SECURITY,
+            'maxBytes': LOGGER_MAX_BYTES,
+            'backupCount': LOGGER_BACKUP_COUNT,
+            'formatter': 'fmt-default',
         },
         'console': {
             'level': 'INFO',
             'class': 'logging.StreamHandler',
-            'formatter': 'standard'
+            'formatter': 'fmt-default'
         },
+        'app_handler': {
+            'level': LOGGER_APP_LEVEL,
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': LOGGER_FILE_APP,
+            'maxBytes': LOGGER_MAX_BYTES,
+            'backupCount': LOGGER_BACKUP_COUNT,
+            'formatter': 'fmt-default',
+        }
     },
     'loggers': {
-        'django': {
-            'handlers': ['console'],
+        'django.security': {
+            'handlers': ['console', 'logfile-security'],
+            'level': LOGGER_LEVEL,
             'propagate': True,
-            'level': 'WARN',
         },
-        'django.db.backends': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-            'propagate': False,
-        },
-        '': {  # use 'MYAPP' to make it app specific
-            'handlers': ['console', 'logfile'],
-            'level': 'DEBUG',
-        },
-    }
+    },
 }
+
+update_logger_with_local_app(LOGGING, local_logger_conf, INSTALLED_APPS)
+
+if LOGGING_CLIENT:
+    set_generic_handler(LOGGING, 'logfile-template', LOGGER_CLIENT_LEVEL, LOGGER_FILE_CLIENT, LOGGER_MAX_BYTES,
+                        LOGGER_BACKUP_COUNT, 'logging.handlers.RotatingFileHandler')
+    set_generic_logger(LOGGING, 'django.template', LOGGER_CLIENT_LEVEL, ['console', 'logfile-template'])
+    set_generic_handler(LOGGING, 'logfile-request', LOGGER_CLIENT_LEVEL, LOGGER_FILE_CLIENT, LOGGER_MAX_BYTES,
+                        LOGGER_BACKUP_COUNT, 'logging.handlers.RotatingFileHandler')
+    set_generic_logger(LOGGING, 'django.request', LOGGER_CLIENT_LEVEL, ['console', 'logfile-request'])
+
+if LOGGING_SERVER:
+    set_generic_handler(LOGGING, 'logfile-server', LOGGER_SERVER_LEVEL, LOGGER_FILE_SERVER, LOGGER_MAX_BYTES,
+                        LOGGER_BACKUP_COUNT, 'logging.handlers.RotatingFileHandler')
+    set_generic_logger(LOGGING, 'django.server', LOGGER_SERVER_LEVEL, ['console', 'logfile-server'])
+
+if LOGGING_DB:
+    set_generic_handler(LOGGING, 'logfile-django-db-backend', LOGGER_DB_LEVEL, LOGGER_FILE_DB, LOGGER_MAX_BYTES,
+                        LOGGER_BACKUP_COUNT, 'logging.handlers.RotatingFileHandler')
+    set_generic_logger(LOGGING, 'django.db.backends', LOGGER_DB_LEVEL, ['console', 'logfile-django-db-backend'])
+
 
 MONGO_USER = "mgi_user"
 MONGO_PASSWORD = "mgi_password"
